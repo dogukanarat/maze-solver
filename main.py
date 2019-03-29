@@ -4,8 +4,22 @@ __author__ = "dogukanarat"
 import os
 import cv2 as cv
 import numpy as np
-import skimage
+from skimage.morphology import skeletonize
 
+# split function definition
+def split_image(image, lower_treshold, upper_treshold):
+
+    comp = np.zeros_like(image)
+    for i in range(len(image)):
+        for j in range(len(image[i])):
+            if image[i][j] >= lower_treshold and image[i][j] <= upper_treshold:
+                comp[i][j] = 255
+            else:
+                comp[i][j] = 0
+    
+    return comp
+
+# defining file path
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # reading image
@@ -25,20 +39,33 @@ dilation = cv.dilate(binary, np.ones((6, 6), np.uint8), iterations=3)
 # marker labelling
 ret, markers = cv.connectedComponents(dilation)
 
-# Map component markers to hue val
-label_hue = np.uint8( 179 * markers / np.max(markers) )
-blank_ch = 255 * np.ones_like( label_hue )
-labeled_img = cv.merge([label_hue, blank_ch, blank_ch])
+# map component markers to hue val
+labeling = np.uint8( 179 * markers / np.max(markers) )
 
-#np.where(label_hue < 5, label_hue, -1)
+# spliting image into component
+component_1 = split_image(labeling, 10, 150)
+component_2 = split_image(labeling, 150, 255)
 
-# cvt to BGR for display
-labeled_img = cv.cvtColor(labeled_img, cv.COLOR_HSV2BGR)
+# erode, dilate component
+dilated_component_1 = cv.dilate(
+    component_1, np.ones((7, 7), np.uint8), iterations=3)
+eroded_component_1 = cv.erode(
+    dilated_component_1, np.ones((7, 7), np.uint8), iterations=3)
 
-# set bg label to black
-labeled_img[label_hue == 0] = 0
+# erode, dilate component
+dilated_component_2 = cv.dilate(
+    component_2, np.ones((7, 7), np.uint8), iterations=3)
+eroded_component_2 = cv.erode(
+    dilated_component_2, np.ones((7, 7), np.uint8), iterations=3)
 
-cv.imshow('Labelled', labeled_img)
+# merging components
+merged_image = eroded_component_1 + eroded_component_2
+
+final_image = 255 - merged_image 
+
+#skeleton = skeletonize(image)
+
+cv.imshow('Labelled', final_image)
 cv.waitKey()
 
 if __name__ == '__main__':
