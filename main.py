@@ -5,6 +5,9 @@ import os
 import cv2 as cv
 import numpy as np
 from skimage.morphology import skeletonize
+from skimage.filters import threshold_otsu
+from skimage.viewer import ImageViewer
+from skimage import io
 
 # split function definition
 def split_image(image, lower_treshold, upper_treshold):
@@ -61,12 +64,25 @@ eroded_component_2 = cv.erode(
 # merging components
 merged_image = eroded_component_1 + eroded_component_2
 
+# inverting image
 final_image = 255 - merged_image 
 
-#skeleton = skeletonize(image)
+# skeleton algorithm
+kernel = np.ones((1, 1), np.uint8)
+opening = cv.morphologyEx(final_image, cv.MORPH_OPEN, kernel)
+blur = cv.GaussianBlur(opening, (1, 1), 0)
+ret3, th4 = cv.threshold(blur, 0, 255, cv.THRESH_BINARY+cv.THRESH_OTSU)
+th4[th4 == 255] = 1
+skel = skeletonize(th4)
 
-cv.imshow('Labelled', final_image)
-cv.waitKey()
+# viewing the resultant image
+viewer = ImageViewer(skel)
+viewer.show()
+
+# saving image as skeleton structure
+skel = skel * 255
+skel = skel.astype(np.uint8)
+io.imsave(fname=BASE_DIR + '/skel.jpg', arr=skel)
 
 if __name__ == '__main__':
     pass
