@@ -1,7 +1,7 @@
 # maze-solver
 Maze Solving and Vehicle Routing Algorithm
 
-[![Build Status](https://travis-ci.com/ieee-uv-project/maze-solver.svg?branch=master)](https://travis-ci.com/ieee-uv-project/maze-solver)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2624203.svg)](https://doi.org/10.5281/zenodo.2624203)
 
 ## find_path
 It solves the given maze image and saves the path in binary format.
