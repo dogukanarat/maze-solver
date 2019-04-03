@@ -1,0 +1,24 @@
+Metadata-Version: 2.1
+Name: maze-solver-dogukanarat
+Version: 0.0.1
+Summary: A maze solver package
+Home-page: https://github.com/ieee-uv-project/maze-solver
+Author: Doğukan Fikri Arat
+Author-email: aratdogukan@gmail.com
+License: UNKNOWN
+Description: # maze-solver
+        Maze Solving and Vehicle Routing Algorithm
+        
+        [![Build Status](https://travis-ci.com/ieee-uv-project/maze-solver.svg?branch=master)](https://travis-ci.com/ieee-uv-project/maze-solver)
+        
+        ## find_path
+        It solves the given maze image and saves the path in binary format.
+        
+        ## find_route
+        It takes the binary image and exacts the path using algorithm, then save it as datafile
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
