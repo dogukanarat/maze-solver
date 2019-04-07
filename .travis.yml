@@ -1,21 +1,6 @@
 language: python
-cache: pip
 python:
     - 2.7
-    - 3.6
-    #- nightly
-    #- pypy
-    #- pypy3
-matrix:
-    allow_failures:
-        - python: nightly
-        - python: pypy
-        - python: pypy3
 install:
-    #- pip install -r requirements.txt
-    - pip install numpy
-script:
-    - true 
-notifications:
-    on_success: change
-    on_failure: change
+    - pip install unittest2
+script: python test.py
