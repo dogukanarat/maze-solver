@@ -4,4 +4,5 @@ python:
     - "3.4"
 install:
     - pip install unittest2
-script: python test.py
+script:
+    python test.py
