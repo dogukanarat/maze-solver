@@ -5,6 +5,9 @@ import os
 import cv2 as cv
 import numpy as np
 from skimage.viewer import ImageViewer
+from skimage import io
+import sys
+import time
 
 # router algorithm defition
 def find_route(image_file, data_file):
@@ -13,10 +16,11 @@ def find_route(image_file, data_file):
     image = cv.imread(image_file, cv.IMREAD_GRAYSCALE)
     [rows, cols] = image.shape
 
-    # normalizing image
-    normalizedImage = cv.normalize(
-        image, None, alpha=0, beta=1, norm_type=cv.NORM_MINMAX, dtype=cv.CV_32F)
-    ret, binary = cv.threshold(image, 150, 255, cv.THRESH_BINARY)
+    # creating test image
+    blank_image = np.zeros((rows, cols, 3), np.uint8)
+
+    # thresholding image
+    _, binary = cv.threshold(image, 150, 255, cv.THRESH_BINARY)
 
     # finding the starting point
     done, i, j = False, 0, 0
@@ -33,28 +37,42 @@ def find_route(image_file, data_file):
     # preparing the algorithm
     router = [[1, 2, 3], [4, 5, 6], [7, 8 ,9]]
     path = []
-    done = max(row, col)
+    done = False
+    row_temp, col_temp = 0, 0
 
     # finding the path 
-    while( not done == 0 ):
+    while( not done ):
+        row_temp = row
+        col_temp = col
         for i in (-1,0,1):
             for j in (-1, 0, 1):
                 if((binary[row+i][col+j] == 255) and not( (i == 0) and (j == 0))):
                     path.append(router[i+1][j+1])
+
+                    #test image
+                    blank_image[row, col] = (0, 0, 255)
+
                     binary[row][col] = 0
                     row = row + i
                     col = col + j
+                    
+                    print("Status: [{},{}] in [{}, {}] was processed!".format(
+                        row, col, rows, cols), end="\r", flush=True)
                 else:
                     pass
-        done = done - 1
+        if( row_temp == row and col_temp == col ): done = True
+    print("")
 
-    # check the result
-    #print(path)
-
-    # save the result
+    # saving the result
     np.savetxt(data_file, path, delimiter=',', fmt='%1u')
 
+    # saving the test file
+    blank_image = blank_image.astype(np.uint8)
+    io.imsave(fname="check_file.jpg", arr=blank_image)
+
     print('Creating route file was successfully done!')
+
+    return 0
 
 if __name__ == "__main__":
     pass

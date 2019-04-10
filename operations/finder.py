@@ -29,32 +29,32 @@ def find_path(image_file, target_file):
     image = cv.imread(image_file, cv.IMREAD_GRAYSCALE)
     [rows, cols] = image.shape
 
-    # threshold image
+    # thresholding image
     _, binary = cv.threshold(image, 150, 255, cv.THRESH_BINARY)
 
-    # invert image
+    # inverting image
     binary = 255 - binary
 
-    # erode, dilate image
+    # eroding, dilating image
     dilation = cv.dilate(binary, np.ones((6, 6), np.uint8), iterations=3)
 
     # marker labelling
     _, markers = cv.connectedComponents(dilation)
 
-    # map component markers to hue val
+    # maping component markers to hue value
     labeling = np.uint8( 179 * markers / np.max(markers) )
 
     # spliting image into component
     component_1 = split_image(labeling, 10, 150)
     component_2 = split_image(labeling, 150, 255)
 
-    # erode, dilate component
+    # eroding, dilating component
     dilated_component_1 = cv.dilate(
         component_1, np.ones((7, 7), np.uint8), iterations=3)
     eroded_component_1 = cv.erode(
         dilated_component_1, np.ones((7, 7), np.uint8), iterations=3)
 
-    # erode, dilate component
+    # eroding, dilating component
     dilated_component_2 = cv.dilate(
         component_2, np.ones((7, 7), np.uint8), iterations=3)
     eroded_component_2 = cv.erode(
@@ -63,7 +63,7 @@ def find_path(image_file, target_file):
     # merging components
     merged_image = eroded_component_1 + eroded_component_2
 
-    # inverting image
+    # inverting the image
     final_image = 255 - merged_image 
 
     # skeleton algorithm
@@ -74,16 +74,13 @@ def find_path(image_file, target_file):
     th4[th4 == 255] = 1
     skel = skeletonize(th4)
 
-    # viewing the resultant image
-    #viewer = ImageViewer(skel)
-    #viewer.show()
-
-    # saving image as skeleton structure
+    # saving the image as skeleton structure
     skel = skel * 255
     skel = skel.astype(np.uint8)
     io.imsave(fname=target_file, arr=skel)
 
     print('Finding path was successfully operated!')
+    
     return 0
 
 if __name__ == '__main__':
