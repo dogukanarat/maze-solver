@@ -57,8 +57,7 @@ def find_route(image_file, data_file, check_file="check_file.jpg"):
                     row = row + i
                     col = col + j
                     
-                    print("Status: [{},{}] in [{}, {}] was processed!".format(
-                        row, col, rows, cols), end="\r", flush=True)
+                    print("Status: [{},{}] in [{}, {}] was processed!".format(row, col, rows, cols), end="\r", flush=True)
                 else:
                     pass
         if( row_temp == row and col_temp == col ): done = True
