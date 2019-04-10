@@ -10,7 +10,8 @@ import sys
 import time
 
 # router algorithm defition
-def find_route(image_file, data_file):
+
+def find_route(image_file, data_file, check_file="check_file.jpg"):
 
     # reading image
     image = cv.imread(image_file, cv.IMREAD_GRAYSCALE)
@@ -68,7 +69,7 @@ def find_route(image_file, data_file):
 
     # saving the test file
     blank_image = blank_image.astype(np.uint8)
-    io.imsave(fname="check_file.jpg", arr=blank_image)
+    io.imsave(fname=check_file, arr=blank_image)
 
     print('Creating route file was successfully done!')
 

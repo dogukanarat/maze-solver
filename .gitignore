@@ -1,2 +1,3 @@
 /.vscode/*
 /operations/__pycache__/*
+/results/*
