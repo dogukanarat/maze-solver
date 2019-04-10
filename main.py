@@ -15,4 +15,4 @@ if __name__ == '__main__':
     operations.finder.find_path(
         BASE_DIR + '/contents/no1.png', BASE_DIR + '/skeleton.jpg')
     operations.router.find_route(
-        BASE_DIR + '/skeleton.jpg', BASE_DIR + '/route.out')
+        BASE_DIR + '/skeleton.jpg', BASE_DIR + '/route.csv')
