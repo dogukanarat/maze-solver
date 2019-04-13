@@ -4,17 +4,17 @@ __author__ = "dogukanarat"
 import os
 import cv2 as cv
 import numpy as np
-from skimage.viewer import ImageViewer
-from skimage import io
 import sys
 import time
+from skimage.viewer import ImageViewer
+from skimage import io
 
 # router algorithm defition
 
-def find_route(image_file, data_file, check_file="check_file.jpg"):
+def find_route(self):
 
     # reading image
-    image = cv.imread(image_file, cv.IMREAD_GRAYSCALE)
+    image = cv.imread(self.fileSkel, cv.IMREAD_GRAYSCALE)
     [rows, cols] = image.shape
 
     # creating test image
@@ -64,11 +64,11 @@ def find_route(image_file, data_file, check_file="check_file.jpg"):
     #print("")
 
     # saving the result
-    np.savetxt(data_file, path, delimiter=',', fmt='%1u')
+    np.savetxt(self.fileRoute, path, delimiter=',', fmt='%1u')
 
     # saving the test file
     blank_image = blank_image.astype(np.uint8)
-    io.imsave(fname=check_file, arr=blank_image)
+    io.imsave(fname=self.fileCheck, arr=blank_image)
 
     print('Creating route file was successfully done!')
 

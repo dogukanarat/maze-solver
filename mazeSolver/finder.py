@@ -23,10 +23,10 @@ def split_image(image, lower_treshold, upper_treshold):
     return comp
 
 # path finder defition
-def find_path(image_file, target_file):
+def find_path(self):
 
     # reading image
-    image = cv.imread(image_file, cv.IMREAD_GRAYSCALE)
+    image = cv.imread(self.image, cv.IMREAD_GRAYSCALE)
     [rows, cols] = image.shape
 
     # thresholding image
@@ -77,7 +77,7 @@ def find_path(image_file, target_file):
     # saving the image as skeleton structure
     skel = skel * 255
     skel = skel.astype(np.uint8)
-    io.imsave(fname=target_file, arr=skel)
+    io.imsave(fname=self.fileSkel, arr=skel)
 
     print('Finding path was successfully operated!')
     
