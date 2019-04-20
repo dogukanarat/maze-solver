@@ -16,4 +16,4 @@ install:
   - conda install -c anaconda numpy
   - conda install -c conda-forge opencv
 script:
-    python main.py
+    python src/main.py
