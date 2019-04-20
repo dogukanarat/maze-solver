@@ -1,3 +1,2 @@
 /.vscode/*
-/src/results/*
 /src/mazeSolver/__pycache__/*
