@@ -16,3 +16,6 @@ class mazeSolver(object):
 
     findPath = find_path
     findRoute = find_route
+
+if __name__ == "__main__":
+    pass
