@@ -2,8 +2,8 @@
 __author__ = "dogukanarat"
 
 import uuid
-import mazesolver.finder as finder
-import  mazesolver.router as router
+from mazeSolver.finder import find_path, split_image
+from mazeSolver.router import find_route 
 
 class mazeSolver(object):
     
@@ -19,8 +19,8 @@ class mazeSolver(object):
         self.fileRoute = TARGET_DIR + '/' + TARGET_NAME + '.csv'
         self.fileCheck = TARGET_DIR + '/' + TARGET_NAME + '-CHECK' + '.jpg'
 
-    findPath = finder.find_path
-    findRoute = router.find_route
+    findPath = find_path
+    findRoute = find_route
 
 if __name__ == "__main__":
     pass
