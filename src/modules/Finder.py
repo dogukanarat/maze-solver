@@ -10,7 +10,7 @@ from skimage.viewer import ImageViewer
 from skimage import io
 
 # split function definition
-def split_image(image, lower_treshold, upper_treshold):
+def SplitImage(image, lower_treshold, upper_treshold):
 
     comp = np.zeros_like(image)
     for i in range(len(image)):
@@ -23,12 +23,11 @@ def split_image(image, lower_treshold, upper_treshold):
     return comp
 
 # path finder defition
-def find_path(self):
+def FindPath(self):
 
     # reading image
     image = cv.imread(self.image, cv.IMREAD_GRAYSCALE)
-    [rows, cols] = image.shape
-
+    
     # thresholding image
     _, binary = cv.threshold(image, 150, 255, cv.THRESH_BINARY)
 
@@ -45,39 +44,39 @@ def find_path(self):
     labeling = np.uint8( 179 * markers / np.max(markers) )
 
     # spliting image into component
-    component_1 = split_image(labeling, 10, 150)
-    component_2 = split_image(labeling, 150, 255)
+    componentOne = SplitImage(labeling, 10, 150)
+    ComponentTwo = SplitImage(labeling, 150, 255)
 
     # eroding, dilating component
-    dilated_component_1 = cv.dilate(
-        component_1, np.ones((7, 7), np.uint8), iterations=3)
-    eroded_component_1 = cv.erode(
-        dilated_component_1, np.ones((7, 7), np.uint8), iterations=3)
+    dilatedComponentOne = cv.dilate(
+        componentOne, np.ones((7, 7), np.uint8), iterations=3)
+    erodedComponentOne = cv.erode(
+        dilatedComponentOne, np.ones((7, 7), np.uint8), iterations=3)
 
     # eroding, dilating component
-    dilated_component_2 = cv.dilate(
-        component_2, np.ones((7, 7), np.uint8), iterations=3)
-    eroded_component_2 = cv.erode(
-        dilated_component_2, np.ones((7, 7), np.uint8), iterations=3)
+    dilatedComponentTwo = cv.dilate(
+        ComponentTwo, np.ones((7, 7), np.uint8), iterations=3)
+    erodedComponentTwo = cv.erode(
+        dilatedComponentTwo, np.ones((7, 7), np.uint8), iterations=3)
 
     # merging components
-    merged_image = eroded_component_1 + eroded_component_2
+    mergedImage = erodedComponentOne + erodedComponentTwo
 
     # inverting the image
-    final_image = 255 - merged_image 
+    finalImage = 255 - mergedImage 
 
     # skeleton algorithm
     kernel = np.ones((1, 1), np.uint8)
-    opening = cv.morphologyEx(final_image, cv.MORPH_OPEN, kernel)
+    opening = cv.morphologyEx(finalImage, cv.MORPH_OPEN, kernel)
     blur = cv.GaussianBlur(opening, (1, 1), 0)
-    _, th4 = cv.threshold(blur, 0, 255, cv.THRESH_BINARY+cv.THRESH_OTSU)
-    th4[th4 == 255] = 1
-    skel = skeletonize(th4)
+    _, threshHolded = cv.threshold(blur, 0, 255, cv.THRESH_BINARY+cv.THRESH_OTSU)
+    threshHolded[threshHolded == 255] = 1
+    skeletoneImage = skeletonize(threshHolded)
 
     # saving the image as skeleton structure
-    skel = skel * 255
-    skel = skel.astype(np.uint8)
-    io.imsave(fname=self.fileSkel, arr=skel)
+    skeletoneImage = skeletoneImage * 255
+    skeletoneImage = skeletoneImage.astype(np.uint8)
+    io.imsave(fname=self.fileSkeletone, arr=skeletoneImage)
 
     print('Finding path was successfully operated!')
     
