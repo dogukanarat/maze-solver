@@ -3,7 +3,7 @@
 import uuid
 from .Finder import FindPath
 from .Router import FindRoute
-from .Transformer import *
+from .Transformer import FourPointTransformation
 
 
 class MazeSolver(object):
