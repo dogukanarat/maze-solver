@@ -2,15 +2,14 @@
 
 import cv2 as cv
 import numpy as np
-import argparse
-import matplotlib.pyplot as plt
-
-from scipy import optimize
-from skimage import transform as tf
 from skimage import io
 
 
 def FourPointTransformation(self):
+    '''
+    Definition: This module transform image into useful format for other process of object\n
+    Usage: Object.FourPointTransformation()
+    '''
 
     # reading image
     image = cv.imread(self.image)

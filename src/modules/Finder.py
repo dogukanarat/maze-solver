@@ -11,21 +11,21 @@ from skimage import io
 # split function definition
 
 
-def Splitimage(image, LOWER_TRESHOLD, UPPER_TRESHOLD):
+def SplitImage(self, image, LOWER_TRESHOLD, UPPER_TRESHOLD):
     '''
     Definition: This module process to split an image into its components\n
-    Usage: Object.Splitimage()
+    Usage: Object.SplitImage()
     '''
 
-    comp = np.zeros_like(image)
+    tempImage = np.zeros_like(image)
     for i in range(len(image)):
         for j in range(len(image[i])):
             if image[i][j] >= LOWER_TRESHOLD and image[i][j] <= UPPER_TRESHOLD:
-                comp[i][j] = 255
+                tempImage[i][j] = 255
             else:
-                comp[i][j] = 0
+                tempImage[i][j] = 0
 
-    return comp
+    return tempImage
 
 # path finder defition
 
@@ -55,8 +55,8 @@ def FindPath(self):
     labeling = np.uint8(179 * markers / np.max(markers))
 
     # spliting image into component
-    componentOne = Splitimage(labeling, 10, 150)
-    ComponentTwo = Splitimage(labeling, 150, 255)
+    componentOne = self.SplitImage(labeling, 10, 150)
+    ComponentTwo = self.SplitImage(labeling, 150, 255)
 
     # eroding, dilating component
     dilatedComponentOne = cv.dilate(
@@ -83,12 +83,12 @@ def FindPath(self):
     _, threshHolded = cv.threshold(
         blur, 0, 255, cv.THRESH_BINARY+cv.THRESH_OTSU)
     threshHolded[threshHolded == 255] = 1
-    skeletoneimage = skeletonize(threshHolded)
+    skeletoneImage = skeletonize(threshHolded)
 
     # saving the image as skeleton structure
-    skeletoneimage = skeletoneimage * 255
-    skeletoneimage = skeletoneimage.astype(np.uint8)
-    io.imsave(fname=self.fileSkeletone, arr=skeletoneimage)
+    skeletoneImage = skeletoneImage * 255
+    skeletoneImage = skeletoneImage.astype(np.uint8)
+    io.imsave(fname=self.fileSkeletone, arr=skeletoneImage)
 
     print('Finding path was successfully operated!')
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import uuid
-from .Finder import FindPath
+from .Finder import FindPath, SplitImage
 from .Router import FindRoute
 from .Transformer import FourPointTransformation
 
@@ -26,6 +26,7 @@ class MazeSolver(object):
         self.fileCheck = TARGET_DIR + '/' + TARGET_NAME + '-CHECK' + '.jpg'
 
     FindPath = FindPath
+    SplitImage = SplitImage
     FindRoute = FindRoute
     FourPointTransformation = FourPointTransformation
 

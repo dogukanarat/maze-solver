@@ -1,13 +1,14 @@
 {
-    "python.linting.pylintEnabled": true,
-    "python.pythonPath": "C:\\Users\\monster\\Anaconda3\\python.exe",
-    "python.envFile": "${workspaceFolder}/.env",
-    "python.linting.enabled": true,
-    "python.linting.flake8Enabled": false,
-    "files.exclude": {
-        "**/__pycache__": true,
-        "**/.vscode": true,
-        "**/*.pyc": true
-    },
-    "editor.detectIndentation": false
+  "python.linting.pylintEnabled": true,
+  "python.pythonPath": "C:\\Users\\monster\\Anaconda3\\python.exe",
+  "python.envFile": "${workspaceFolder}/.env",
+  "python.linting.enabled": true,
+  "python.linting.flake8Enabled": false,
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.vscode": true,
+    "**/*.pyc": true
+  },
+  "editor.detectIndentation": false,
+  "workbench.colorTheme": "Visual Studio Dark"
 }
