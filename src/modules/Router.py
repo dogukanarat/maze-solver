@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-__author__ = "dogukanarat"
 
 import os
 import cv2 as cv
@@ -12,6 +11,10 @@ from skimage import io
 # router algorithm defition
 
 def FindRoute(self):
+    '''
+    Definition: This module process for finding route into skeletonized image\n
+    Usage: Object.FindRoute()
+    '''
 
     # reading image
     image = cv.imread(self.fileSkeletone, cv.IMREAD_GRAYSCALE)

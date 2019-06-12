@@ -8,5 +8,6 @@
         "**/__pycache__": true,
         "**/.vscode": true,
         "**/*.pyc": true
-    }
+    },
+    "editor.detectIndentation": false
 }
