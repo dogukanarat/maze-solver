@@ -44,6 +44,7 @@ def FourPointTransformation(self):
     rotatedImage = cv.warpAffine(
         image, rotationMatrix, (width, height), borderMode=cv.BORDER_REFLECT)
 
+    # fixing the problem caused by transformation
     grayScale = cv.cvtColor(rotatedImage, cv.COLOR_BGR2GRAY)
     grayScaleTranspose = np.transpose(grayScale)
 
@@ -71,9 +72,12 @@ def FourPointTransformation(self):
 
     rotatedImage = croppedImage
 
+    # saving result file
     rotatedImage = rotatedImage.astype(np.uint8)
     io.imsave(fname=self.fileRotated, arr=rotatedImage)
+
     self.level = rotatedImage
+
     print('Rotation image was successfully operated!')
 
     return None
