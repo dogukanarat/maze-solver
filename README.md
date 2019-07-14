@@ -13,16 +13,28 @@ from mazeSolver.solver import mazeSolver
 ```
 Then, we will create object while typing maze imaze as param 1 and result folder as param 2
 ```python
-mz = mazeSolver(BASE_DIR + '/contents/no1.png', BASE_DIR + '/results')
+# call the object defining the maze image
+mz = MazeSolver(BASE_DIR + '/contents/no4.png',
+                 BASE_DIR + '/results', "RESULTFILE")
 ```
 Finally, we will call function respectively
 ```python
-mz.findPath()
-mz.findRoute()
+mz.FourPointTransformation()  # rotating the image for operation
+mz.ShowResult() # showing result image
+mz.FindPath()  # finding the path ino the maze image
+mz.ShowResult() # showing result image
+mz.FindRoute()  # finding the route in the maze image
+mz.ShowResult() # showing result image
 ```
 
-## findPath
+## FourPointTransformation()
+It transform the image, which was naturally tilted due to camera angle, to proper image for algorithm
+
+## FindPath()
 It solves the given maze image and saves the path in binary format.
 
-## findRoute
+## FindRoute()
 It takes the binary image and exacts the path using algorithm, then save it as datafile
+
+## ShowResult()
+It shows the previous process result
