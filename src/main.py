@@ -13,8 +13,12 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # defining base dire
 if __name__ == '__main__':
 
     # call the object defining the maze image
-    mz = MazeSolver(BASE_DIR + '/contents/no4.png',
+    mz = MazeSolver(BASE_DIR + '/contents/no2.png',
                     BASE_DIR + '/results', "RESULTFILE")
-    mz.FourPointTransformation()  # rotating the image for operation
-    mz.FindPath()  # finding the path ino the maze image
-    mz.FindRoute()  # finding the route in the maze image
+    
+    # rotating the image for operation
+    mz.FourPointTransformation()
+    # finding the path ino the maze image
+    mz.FindPath() 
+    # finding the route in the maze image
+    mz.FindRoute()  

@@ -1,2 +1,4 @@
 /src/mazeSolver/__pycache__/*
+/.vscode/*
+/.vs/
 *.pyc
