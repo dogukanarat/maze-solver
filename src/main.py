@@ -16,7 +16,7 @@ if __name__ == '__main__':
     mz = MazeSolver(BASE_DIR + '/contents/no4.png',
                     BASE_DIR + '/results', "RESULTFILE")
     mz.FourPointTransformation()  # rotating the image for operation
-    mz.ShowResult()
+    # mz.ShowResult()
     mz.FindPath()  # finding the path ino the maze image
     # mz.ShowResult()
     mz.FindRoute()  # finding the route in the maze image

@@ -5,8 +5,6 @@ from .Finder import FindPath, SplitImage
 from .Router import FindRoute
 from .Transformer import FourPointTransformation
 import cv2 as cv
-import matplotlib
-matplotlib.use('agg')
 
 
 class MazeSolver(object):
