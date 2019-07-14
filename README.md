@@ -9,7 +9,7 @@ Maze Solving and Vehicle Routing Algorithm
 ## application
 First, we need to import package
 ```python
-from mazeSolver.solver import mazeSolver
+from modules.MazeSolver import MazeSolver
 ```
 Then, we will create object while typing maze imaze as param 1 and result folder as param 2
 ```python
