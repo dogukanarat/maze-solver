@@ -3,6 +3,7 @@
 import cv2 as cv
 import numpy as np
 from skimage import io
+from functools import reduce
 
 
 def FourPointTransformation(self):
@@ -43,10 +44,39 @@ def FourPointTransformation(self):
     rotatedImage = cv.warpAffine(
         image, rotationMatrix, (width, height), borderMode=cv.BORDER_REFLECT)
 
+    grayScale = cv.cvtColor(rotatedImage, cv.COLOR_BGR2GRAY)
+    grayScaleTranspose = np.transpose(grayScale)
+
+    rowIndex = 0
+    columnIndex = 0
+
+    for item in grayScale:
+        sumOfArray = sum(item)
+        averageOfArray = sumOfArray / len(item)
+        if averageOfArray <= 150:
+            topTrim = rowIndex
+            break
+        rowIndex += 1
+
+    for item in grayScaleTranspose:
+        sumOfArray = sum(item)
+        averageOfArray = sumOfArray / len(item)
+        if averageOfArray <= 150:
+            leftTrim = columnIndex
+            break
+        columnIndex += 1
+
+    croppedImage = rotatedImage[topTrim:(
+        height-topTrim), leftTrim:(width-leftTrim)]
+
+    rotatedImage = croppedImage
+
     rotatedImage = rotatedImage.astype(np.uint8)
     io.imsave(fname=self.fileRotated, arr=rotatedImage)
-
+    self.level = rotatedImage
     print('Rotation image was successfully operated!')
+
+    return None
 
 
 if __name__ == "__main__":

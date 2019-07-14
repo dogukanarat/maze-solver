@@ -4,6 +4,7 @@ import uuid
 from .Finder import FindPath, SplitImage
 from .Router import FindRoute
 from .Transformer import FourPointTransformation
+import cv2 as cv
 
 
 class MazeSolver(object):
@@ -16,6 +17,7 @@ class MazeSolver(object):
         self.uniqueKey = uuid.uuid4().hex[:8].upper()
         self.image = IMAGE_FILE
         self.keyname = ""
+        self.level = ""
 
         if not TARGET_NAME:
             TARGET_NAME = self.uniqueKey
@@ -29,6 +31,13 @@ class MazeSolver(object):
     SplitImage = SplitImage
     FindRoute = FindRoute
     FourPointTransformation = FourPointTransformation
+
+    def ShowResult(self):
+        cv.imshow('image', self.level)
+        cv.waitKey(0)
+        cv.destroyAllWindows()
+
+        return None
 
 
 if __name__ == "__main__":

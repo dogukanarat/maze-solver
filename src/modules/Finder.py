@@ -8,6 +8,7 @@ from skimage.filters import threshold_otsu
 from skimage.viewer import ImageViewer
 from skimage import io
 
+
 # split function definition
 
 
@@ -56,7 +57,7 @@ def FindPath(self):
 
     # spliting image into component
     componentOne = self.SplitImage(labeling, 10, 150)
-    ComponentTwo = self.SplitImage(labeling, 150, 255)
+    componentTwo = self.SplitImage(labeling, 150, 255)
 
     # eroding, dilating component
     dilatedComponentOne = cv.dilate(
@@ -66,7 +67,7 @@ def FindPath(self):
 
     # eroding, dilating component
     dilatedComponentTwo = cv.dilate(
-        ComponentTwo, np.ones((7, 7), np.uint8), iterations=3)
+        componentTwo, np.ones((7, 7), np.uint8), iterations=3)
     erodedComponentTwo = cv.erode(
         dilatedComponentTwo, np.ones((7, 7), np.uint8), iterations=3)
 
@@ -90,9 +91,10 @@ def FindPath(self):
     skeletoneImage = skeletoneImage.astype(np.uint8)
     io.imsave(fname=self.fileSkeletone, arr=skeletoneImage)
 
+    self.level = skeletoneImage
     print('Finding path was successfully operated!')
 
-    return 0
+    return None
 
 
 if __name__ == '__main__':
